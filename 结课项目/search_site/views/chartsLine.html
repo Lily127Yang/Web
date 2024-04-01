@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>小羊News</title>
+    <link rel="icon" href="images/icon.svg">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 1500px;height:700px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'), 'light');
+    $.get("/get_data?column=<%= column %>&search=<%= search %>", function (data) {
+        data = JSON.parse(data);
+        X = [];
+        for (let i = 0; i < data.length; i++) {
+            X.push(data[i].name);
+        }
+        var option = {
+            title: {text: '时间热度分析'},
+            xAxis: {type: 'category', data: X},
+            yAxis: {type: 'value',color: '#81acb5'},
+            legend: {
+                orient: 'vertical',
+                left: 'right',
+            },
+            tooltip: {trigger: 'axis', axisPointer: {type: 'cross', label: {backgroundColor: '#81acb5'}}},
+            series: [
+                {
+                    name: '时间热度分析',
+                    type: 'line',
+                    data: data,
+                    smooth: true,
+                    areaStyle: {}
+                }
+            ]
+        };
+        myChart.setOption(option)
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小羊News</title>
+    <link rel="icon" href="images/icon.svg">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/style_main.css">
+
+</head>
+
+
+<body>
+
+<div class="header">
+    <div class="header-top"></div>
+    <div class="header-logo"><img src="images/logo2.png" alt="logo"></div>
+</div>
+<!---->
+
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div class="container-fluid">
+        <div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/"><strong>搜索</strong></a></li>
+                <li
+                <% if(column === "title") { %>  class="active"
+                        <% } %>
+                ><a href="/switch?column=title&search=<%= search %>"><strong>标题</strong></a></li>
+                <li
+                <% if(column === "summary") { %>  class="active"
+                        <% } %>
+                ><a href="/switch?column=summary&search=<%= search %>"><strong>摘要</strong></a></li>
+                <li
+                <% if(column === "content") { %>  class="active"
+                        <% } %>
+                ><a href="/switch?column=content&search=<%= search %>"><strong>正文</strong></a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <strong>排序</strong>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/sort?sorting=asc&column=<%= column %>&search=<%= search %>">升序</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/sort?sorting=des&column=<%= column %>&search=<%= search %>">降序</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <strong>时间热度统计</strong>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a target="_blank" href="/wordCloud">词云图</a></li>
+                        <li class="divider"></li>
+                        <li><a target="_blank"
+                               href="/linChart?column=<%= column %>&search=<%= search %>">折线图</a></li>
+                        <li class="divider"></li>
+                        <li><a target="_blank"
+                               href="/bar?column=<%= column %>&search=<%= search %>">直方图</a></li>
+                        <li class="divider"></li>
+                        <li><a target="_blank"
+                               href="/pie?column=<%= column %>&search=<%= search %>">饼图</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+<!--    -->
+<div class="background">
+    <div class="content">
+        <ul>
+            <% for(var i = 0;i < content.length;i++){ %>
+                <li>
+                    <a href="/article?id=<%= content[i].id_fetches %>" class="contentBox" target="_blank">
+                        <strong><%= content[i].title %></strong>
+                        <p><%= content[i].summary_ %></p>
+                        <p><%= new Date(content[i].publish_date).toISOString().substring(0, 10) %></p>
+                    </a>
+                </li>
+            <% } %>
+        </ul>
+    </div>
+    <div class="pageControl">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="/">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link"
+                                     href="/process_page?column=<%= column %>&page=1&search=<%= search %>">1</a>
+            </li>
+            <li class="page-item"><a class="page-link"
+                                     href="/process_page?column=<%= column %>&page=2&search=<%= search %>">2</a>
+            </li>
+            <li class="page-item"><a class="page-link"
+                                     href="/process_page?column=<%= column %>&page=3&search=<%= search %>">3</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="/">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="footer">
+</div>
+
+</body>
+</html>

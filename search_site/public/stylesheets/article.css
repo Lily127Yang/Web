@@ -1,0 +1,30 @@
+.article {
+    padding-left: 400px;
+    padding-right: 400px;
+    padding-top: 120px;
+    position: center;
+}
+
+.left {
+    float: left;
+    line-height: 2em;
+    letter-spacing: 2px;
+}
+
+.right {
+    float: right;
+    line-height: 2em;
+    letter-spacing: 2px;
+}
+
+.center {
+    padding-left: 330px;
+    padding-right: 200px;
+    line-height: 2em;
+    letter-spacing: 2px;
+}
+
+p {
+    line-height: 2em;
+    letter-spacing: 2px;
+}
